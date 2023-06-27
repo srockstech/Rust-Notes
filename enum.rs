@@ -19,6 +19,31 @@ enum Direction {
     Backward
 }
 
+//Enums with data: This allows to attach additional values to enum values
+enum Shape {
+    Circle(f64),
+    Rectangle(f64, f64),
+    Triangle(f64, f64, f64)
+}
+
+fn print_area(shape: Shape){
+    match shape {
+        Shape::Circle(radius) => {
+            let area = std::f64::consts::PI * radius * radius;
+            println!("Area of the circle: {}", area);
+        },
+        Shape::Rectangle(length, breadth) => {
+            let area = length * breadth;
+            println!("Area of the rectangle: {}", area);
+        },
+        Shape::Triangle(side1, side2, side3) => {
+            let s = (side1 + side2 + side3)/2.0;
+            let area = (s * (s - side1) * (s - side2) * (s - side3)).sqrt();
+            println!("Area of the triangle: {}", area);
+        }
+    }
+}
+
 fn main(){
     which_way(Direction::Down);
     let a = Direction::Up;
@@ -28,4 +53,6 @@ fn main(){
     let _e = Direction::Backward;
     println!("{:?}", a);
     println!("{:?}", _b);
+
+    print_area(Shape::Triangle(60.0, 60.0, 50.0));
 }
